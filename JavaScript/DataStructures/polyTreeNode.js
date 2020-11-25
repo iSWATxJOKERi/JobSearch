@@ -5,15 +5,15 @@ class PolyTreeNode {
         this.children = [];
     }
 
-    parent() {
+    parental() {
         return this.parent
     }
 
-    value() {
+    valueOf() {
         return this.value
     }
 
-    children() {
+    childrenOf() {
         return this.children.slice();
     }
 
@@ -27,9 +27,10 @@ class PolyTreeNode {
 
     set parentEquals(parent) {
         if(this.parent === parent) { return };
-        let kids = this.parent.privateChildren();
-        let arr = [];
+
         if(this.parent) {
+            let kids = this.parent.privateChildren();
+            let arr = [];
             for(let i = 0; i < kids.length; i++) {
                 if(kids[i] === this) {
                     kids[i] = "";
@@ -38,8 +39,8 @@ class PolyTreeNode {
                     arr.push(kids[i])
                 }
             }
+            this.parent.childrenArray = arr;
         }
-        this.parent.childrenArray(arr);
         this.parent = parent;
         parent ? this.parent.children.push(this) : null;
     }
@@ -57,7 +58,27 @@ class PolyTreeNode {
     }
 
     dfs(target_value) {
-        if(this.value === target_value) { return this }
+        if(this.value === target_value) { return this };
+        let kids = this.childrenOf();
+        let result;
+        for(let i = 0; i < kids.length; i++) {
+            result = kids[i].dfs(target_value);
+            if(result){ return result }
+        }
+        return null
+    }
+
+    bfs(target_value) {
+        let opps = [this];
+        while(opps.length !== 0) {
+            let first = opps.shift();
+            let kids = first.childrenOf();
+            if(first.value === target_value){ return first }
+            for(let i = 0; i < kids.length; i++) {
+                opps.push(kids[i]);
+            }
+        }
+        return null
     }
 }
 
@@ -65,7 +86,10 @@ let btd = new PolyTreeNode("root");
 let walk = new PolyTreeNode("insane");
 let cry = new PolyTreeNode("laugh");
 
-walk.parent = btd
-console.log(walk)
-walk.parent = cry
-console.log(walk)
+cry.parentEquals = btd;
+// console.log(walk)
+walk.parentEquals = btd;
+// console.log(walk)
+console.log(btd.bfs("insane"));
+// console.log(btd.parental());
+
