@@ -46,7 +46,7 @@ class PolyTreeNode {
     }
 
     addChild(child) {
-        child.parentEquals(this);
+        child.parentEquals = this;
     }
 
     removeChild(child) {
@@ -86,10 +86,14 @@ let btd = new PolyTreeNode("root");
 let walk = new PolyTreeNode("insane");
 let cry = new PolyTreeNode("laugh");
 
-cry.parentEquals = btd;
+// cry.parentEquals = btd;
 // console.log(walk)
-walk.parentEquals = btd;
+// walk.parentEquals = btd;
 // console.log(walk)
-console.log(btd.bfs("insane"));
+// btd.addChild(walk);
+// btd.addChild(cry);
+// console.log(btd.bfs("insane"));
 // console.log(btd.parental());
+
+module.exports = PolyTreeNode;
 
