@@ -25,22 +25,30 @@ function bfs(starting_node, target_value) {
 }
 
 const graph = {
-    'a': ['b', 'c', 'e'],
-    'b': [],
-    'c': ['b', 'd'],
-    'd': [],
-    'e': ['a'],
-    'f': ['e']
+    'h': ['i', 'j'],
+    'i': [],
+    'j': ['k'],
+    'k': [],
+    'l': ['m'],
+    'm': []
 }
 
-function dfs(node, graph, visited = new Set()) {
+function dfs(graph) {
+    let visited = new Set();
+
+    for(let i = 0; i < Object.keys(graph).length; i++) {
+        _dfs(Object.keys(graph)[i], graph, visited);
+    }
+}
+
+function _dfs(node, graph, visited) {
     if(visited.has(node)) { return null }
 
     console.log(node);
     visited.add(node);
 
     for(let i = 0; i < graph[node].length; i++) {
-        dfs(graph[node][i], graph, visited)
+        _dfs(graph[node][i], graph, visited)
     }
 }
 
@@ -59,4 +67,4 @@ e.neighbors = [a];
 f.neighbors = [e];
 
 // console.log(bfs(a, "f"));
-dfs('f', graph);
+dfs(graph);
