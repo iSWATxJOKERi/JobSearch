@@ -66,6 +66,25 @@ class KnightPathFinder {
         }
         return new_positions;
     }
+
+    find_path(end_pos) {
+        let ep = this.root_node.dfs(end_pos);
+        return this.trace_path_back(ep);
+    }
+
+    trace_path_back(end_node) {
+        let path = [];
+
+        let current_node = end_node;
+        while(current_node !== null) {
+            path.unshift(current_node.value)
+            current_node = current_node.parent
+        }
+        return path
+    }
 }
 
-let j = new KnightPathFinder([2,2]);
+let j = new KnightPathFinder([0,0]);
+let node = j.find_path([6,2]);
+console.log(node);
+// console.log(j.trace_path_back(node));

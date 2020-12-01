@@ -58,7 +58,7 @@ class PolyTreeNode {
     }
 
     dfs(target_value) {
-        if(this.value === target_value) { return this };
+        if((this.value[0] === target_value[0]) && (this.value[1] === target_value[1])) { return this };
         let kids = this.childrenOf();
         let result;
         for(let i = 0; i < kids.length; i++) {
@@ -73,7 +73,7 @@ class PolyTreeNode {
         while(opps.length !== 0) {
             let first = opps.shift();
             let kids = first.childrenOf();
-            if(first.value === target_value){ return first }
+            if((first.value[0] === target_value[0]) && (first.value[1] === target_value[1])){ return first }
             for(let i = 0; i < kids.length; i++) {
                 opps.push(kids[i]);
             }
@@ -82,9 +82,9 @@ class PolyTreeNode {
     }
 }
 
-let btd = new PolyTreeNode("root");
-let walk = new PolyTreeNode("insane");
-let cry = new PolyTreeNode("laugh");
+let btd = new PolyTreeNode([2,2]);
+let walk = new PolyTreeNode([7,7]);
+let cry = new PolyTreeNode([2,4]);
 
 // cry.parentEquals = btd;
 // console.log(walk)
@@ -93,7 +93,8 @@ let cry = new PolyTreeNode("laugh");
 // btd.addChild(walk);
 // btd.addChild(cry);
 // console.log(btd.bfs("insane"));
-// console.log(btd.parental());
+// console.log(btd.childrenOf());
+// console.log(btd.bfs([7,7]));
 
 module.exports = PolyTreeNode;
 
