@@ -208,3 +208,43 @@ function tribonacci_number(n) {
 // console.log(tribonacci_number(6))  // 13
 // console.log(tribonacci_number(7))  // 24
 // console.log(tribonacci_number(11)) // 274
+
+//matrix_addition_reloaded
+
+function matrix_addition_reloaded(...matrices) {
+    if(matrices.length < 2) {
+        return matrices;
+    }
+    if(check(matrices)) {
+        let matrix =  matrix_addition(matrices.shift(), matrices.shift());
+        while(matrices.length > 0) {
+            matrix = matrix_addition(matrix, matrices.shift());
+        }
+        return matrix;
+    } else {
+        return null;
+    }
+}
+
+function check(m) {
+    for(let i = 0; i < m.length - 1; i++) {
+        if((m[i][0].length !== m[i + 1][0].length) || (m[i].length !== m[i + 1].length)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+let matrix_a = [[2,5], [4,7]]
+let matrix_b = [[9,1], [3,0]]
+let matrix_c = [[-1,0], [0,-1]]
+let matrix_d = [[2, -5], [7, 10], [0, 1]]
+let matrix_e = [[0 , 0], [12, 4], [6,  3]]
+
+console.log(matrix_addition_reloaded(matrix_a, matrix_b))              // [[11, 6], [7, 7]]
+console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_c))    // [[10, 6], [7, 6]]
+console.log(matrix_addition_reloaded(matrix_e))                        // [[0, 0], [12, 4], [6, 3]]
+console.log(matrix_addition_reloaded(matrix_d, matrix_e))              // [[2, -5], [19, 14], [6, 4]]
+console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_e))    // nil
+console.log(matrix_addition_reloaded(matrix_d, matrix_e, matrix_c))    // nil
