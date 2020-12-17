@@ -242,9 +242,65 @@ let matrix_c = [[-1,0], [0,-1]]
 let matrix_d = [[2, -5], [7, 10], [0, 1]]
 let matrix_e = [[0 , 0], [12, 4], [6,  3]]
 
-console.log(matrix_addition_reloaded(matrix_a, matrix_b))              // [[11, 6], [7, 7]]
-console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_c))    // [[10, 6], [7, 6]]
-console.log(matrix_addition_reloaded(matrix_e))                        // [[0, 0], [12, 4], [6, 3]]
-console.log(matrix_addition_reloaded(matrix_d, matrix_e))              // [[2, -5], [19, 14], [6, 4]]
-console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_e))    // nil
-console.log(matrix_addition_reloaded(matrix_d, matrix_e, matrix_c))    // nil
+// console.log(matrix_addition_reloaded(matrix_a, matrix_b))              // [[11, 6], [7, 7]]
+// console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_c))    // [[10, 6], [7, 6]]
+// console.log(matrix_addition_reloaded(matrix_e))                        // [[0, 0], [12, 4], [6, 3]]
+// console.log(matrix_addition_reloaded(matrix_d, matrix_e))              // [[2, -5], [19, 14], [6, 4]]
+// console.log(matrix_addition_reloaded(matrix_a, matrix_b, matrix_e))    // nil
+// console.log(matrix_addition_reloaded(matrix_d, matrix_e, matrix_c))    // nil
+
+//squarocol?
+
+function squarocol(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        let count = 1;
+        for(let j = 0; j < arr.length; j++) {
+            if(arr[i][j] === arr[i][j + 1]) {
+                count += 1;
+            }
+        }
+        if(count === arr.length) { return true };
+    }
+    for(let i = 0; i < arr.length; i++) {
+        let count = 1;
+        for(let j = 0; j < arr.length - 1; j++) {
+            if(arr[j][i] === arr[j + 1][i]) {
+                count += 1;
+            }
+        }
+        if(count === arr.length) { return true }; 
+    }
+    return false;
+}
+
+// console.log(squarocol([
+//     ["a", "x" , "d"],
+//     ["b", "x" , "e"],
+//     ["c", "x" , "f"],
+// ])) // true
+
+// console.log(squarocol([
+//     ["x", "y", "x"],
+//     ["x", "z", "x"],
+//     ["o", "o", "o"],
+// ])) // true
+
+// console.log(squarocol([
+//     ["o", "x" , "o"],
+//     ["x", "o" , "x"],
+//     ["o", "x" , "o"],
+// ])) // false
+
+// console.log(squarocol([
+//     [1, 2, 2, 7],
+//     [1, 6, 6, 7],
+//     [0, 5, 2, 7],
+//     [4, 2, 9, 7],
+// ])) // true
+
+// console.log(squarocol([
+//     [1, 2, 2, 7],
+//     [1, 6, 6, 0],
+//     [0, 5, 2, 7],
+//     [4, 2, 9, 7],
+// ])) // false
